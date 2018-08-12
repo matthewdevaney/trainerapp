@@ -2,8 +2,8 @@ from django.db import models
 
 
 class Attendee(models.Model):
-    event_id = models.ForeignKey('Event', on_delete=models.CASCADE)
-    student_id = models.ForeignKey('Student', on_delete=models.CASCADE)
+    event = models.ForeignKey('Event', on_delete=models.CASCADE)
+    student = models.ForeignKey('Student', on_delete=models.CASCADE)
     attended = models.BooleanField(default=False)
 
 
@@ -18,7 +18,7 @@ class Course(models.Model):
 
 
 class Event(models.Model):
-    course_id = models.ForeignKey('Course', on_delete=models.CASCADE)
+    course = models.ForeignKey('Course', on_delete=models.CASCADE)
     start_datetime = models.DateTimeField()
     end_datetime = models.DateTimeField()
     location = models.CharField(max_length=128, blank=True)
