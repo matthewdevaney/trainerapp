@@ -24,9 +24,14 @@ class Event(models.Model):
     location = models.CharField(max_length=128, blank=True)
     capacity = models.IntegerField(blank=True)
 
+    def __str__(self):
+        return "".join([str(self.course), ': ', self.start_datetime.strftime('%B %#d, %Y @ %#I%p')])
 
 class Student(models.Model):
     first_name = models.CharField(max_length=64)
     last_name = models.CharField(max_length=64)
     email = models.EmailField()
     inactive = models.BooleanField(blank=True)
+
+    def __str__(self):
+        return "".join([self.last_name, ', ', self.first_name])
