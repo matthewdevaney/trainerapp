@@ -27,6 +27,7 @@ class Event(models.Model):
     def __str__(self):
         return "".join([str(self.course), ': ', self.start_datetime.strftime('%B %#d, %Y @ %#I%p')])
 
+
 class Student(models.Model):
     first_name = models.CharField(max_length=64)
     last_name = models.CharField(max_length=64)
