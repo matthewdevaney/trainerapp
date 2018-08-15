@@ -1,0 +1,18 @@
+{% extends 'trainerapp/base.html' %}
+
+{% block content %}
+    <table>
+        <tr>
+            <td>Start</td>
+            <td>Course</td>
+            <td>Location</td>
+        </tr>
+    {% for event in events %}
+        <tr>
+            <td>{{ event.start_datetime }}</td>
+            <td>{{ event.course }}</td>
+            <td>{{ event.location }}</td>
+        </tr>
+    {% endfor %}
+    </table>
+{% endblock %}

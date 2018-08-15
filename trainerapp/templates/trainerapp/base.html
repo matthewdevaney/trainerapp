@@ -1,0 +1,19 @@
+{% load static %}
+<html>
+<head>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/trainerapp.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+    <title>Trainer App</title>
+</head>
+<body>
+    <div class="topnav">
+        <a>Events</a>
+        <a>Students</a>
+        <a>Courses</a>
+        <a><span class="glyphicon glyphicon-cog"></span></a>
+    </div>
+{% block content %}{% endblock %}
+</body>
+</html>
