@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.views.generic.edit import CreateView, UpdateView
 from .models import Course, Event, Student
 from datetime import datetime
 
@@ -31,3 +32,39 @@ def student_list(request):
 def inactive_student_list(request):
     students = Student.objects.filter(inactive=True).order_by('last_name', 'first_name', 'id')
     return render(request, 'trainerapp/student_list.html', {'students': students, 'table_title': 'Inactive Students'})
+
+
+class StudentAdd(CreateView):
+    model = Student
+    fields = '__all__'
+    template_name_suffix = '_add_form'
+
+
+class StudentEdit(UpdateView):
+    model = Student
+    fields = '__all__'
+    template_name_suffix = '_edit_form'
+
+
+class CourseAdd(CreateView):
+    model = Course
+    fields = '__all__'
+    template_name_suffix = '_add_form'
+
+
+class CourseEdit(UpdateView):
+    model = Course
+    fields = '__all__'
+    template_name_suffix = '_edit_form'
+
+
+class EventAdd(CreateView):
+    model = Event
+    fields = '__all__'
+    template_name_suffix = '_add_form'
+
+
+class EventEdit(UpdateView):
+    model = Event
+    fields = '__all__'
+    template_name_suffix = '_edit_form'

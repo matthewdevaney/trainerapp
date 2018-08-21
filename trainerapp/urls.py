@@ -8,4 +8,10 @@ urlpatterns = [
     path('events/past/', views.past_event_list, name='past_event_list'),
     path('students/', views.student_list, name='student_list'),
     path('students/inactive', views.inactive_student_list, name='inactive_student_list'),
+    path('student/add', views.StudentAdd.as_view(), name='student_add'),
+    path('student/<int:pk>/edit', views.StudentEdit.as_view(), name='student_edit'),
+    path('event/add', views.EventAdd.as_view(), name='event_add'),
+    path('event/<int:pk>/edit', views.EventEdit.as_view(), name='event_edit'),
+    path('course/add', views.CourseAdd.as_view(), name='course_add'),
+    path('course/<int:pk>/edit', views.CourseEdit.as_view(), name='course_edit'),
 ]

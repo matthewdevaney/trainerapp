@@ -1,0 +1,39 @@
+{% extends 'trainerapp/base.html' %}
+
+{% block content %}
+
+<div class="heading-one">
+    Edit Event
+</div>
+<form action="" method="post">
+    {% csrf_token %}
+    <table>
+        <tr>
+            <td>Course</td>
+            <td>{{ form.course }}</td>
+        </tr>
+        <tr>
+            <td>Start Date</td>
+            <td>{{ form.start_datetime }}</td>
+        </tr>
+        <tr>
+            <td>End Date</td>
+            <td>{{ form.end_datetime }}</td>
+        </tr>
+        <tr>
+            <td>Location</td>
+            <td>{{ form.location }}</td>
+        </tr>
+        <tr>
+            <td>Capacity</td>
+            <td>{{ form.capacity }}</td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="Submit"/></td>
+        </tr>
+    </table>
+
+</form>
+
+
+{% endblock %}

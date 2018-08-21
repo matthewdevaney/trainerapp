@@ -6,7 +6,7 @@
         </div>
         <div>
             <p>
-                <a>+ Add Event</a>
+                <a href="{% url 'event_add' %}">+ Add Event</a>
             </p>
         </div>
         <table>
@@ -22,7 +22,7 @@
                 <td>{{ event.course }}</td>
                 <td>{{ event.location }}</td>
                 <td>
-                    <span class="glyphicon glyphicon-pencil"></span>
+                    <a href="{% url 'event_edit' event.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
                     <span class="glyphicon glyphicon-trash"></span>
                 </td>
             </tr>
