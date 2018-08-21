@@ -25,7 +25,7 @@ class Event(models.Model):
     capacity = models.IntegerField(blank=True)
 
     def __str__(self):
-        return "".join([str(self.course), ': ', self.start_datetime.strftime('%B %#d, %Y @ %#I%p')])
+        return "".join([str(self.course), ': ', self.start_datetime.strftime('%B %#d, %Y %#I%p')])
 
 
 class Student(models.Model):

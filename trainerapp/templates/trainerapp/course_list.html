@@ -4,45 +4,40 @@
         <div class="heading-one">
             {{ table_title }}
         </div>
-        <div>
-            <p>
-                <a>+ Add Event</a>
-            </p>
-        </div>
+        <p>
+            <a>+ Add Course</a>
+        </p>
         <table>
             <tr>
-                <th>Date</th>
+                <th>ID</th>
                 <th>Course</th>
-                <th>Location</th>
-                <th></th>
             </tr>
-        {% for event in events %}
+        {% for course in courses %}
             <tr>
-                <td>{{ event.start_datetime }}</td>
-                <td>{{ event.course }}</td>
-                <td>{{ event.location }}</td>
+                <td>{{ course.id }}</td>
+                <td>{{ course.title }}</td>
                 <td>
                     <span class="glyphicon glyphicon-pencil"></span>
                     <span class="glyphicon glyphicon-trash"></span>
                 </td>
             </tr>
         {% endfor %}
-        {% if not events %}
+        {% if not courses %}
             <tr>
                 <td>None</td>
                 <td></td>
             </tr>
         {% endif %}
         </table>
+
         <br>
         <p>
-            {% if table_title == 'Upcoming Events' %}
-            <a href="{% url 'past_event_list' %}">View Past Events</a>
+            {% if table_title == 'Courses' %}
+            <a href="{% url 'inactive_course_list' %}">View Inactive Courses</a>
             {% endif %}
-            {% if table_title == 'Past Events' %}
-            <a href="{% url 'upcoming_event_list' %}">View Upcoming Events</a>
+            {% if table_title == 'Inactive Courses' %}
+            <a href="{% url 'course_list' %}">View Active Courses</a>
             {% endif %}
         </p>
-
 
 {% endblock %}

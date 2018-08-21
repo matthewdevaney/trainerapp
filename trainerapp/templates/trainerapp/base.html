@@ -4,15 +4,18 @@
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="{% static 'css/trainerapp.css' %}">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Patua+One" rel="stylesheet">
 
-    <title>Trainer App</title>
+    <title>Training Tracker</title>
 </head>
 <body>
-    <div class="topnav">
-        <a>Events</a>
-        <a>Students</a>
-        <a>Courses</a>
-        <a><span class="glyphicon glyphicon-cog"></span></a>
+    <div class="top-title">
+        <a>Training Tracker</a>
+    </div>
+    <div class="top-nav">
+        <a href="{% url 'upcoming_event_list' %}">Events</a>
+        <a href="{% url 'course_list' %}">Courses</a>
+        <a href="{% url 'student_list' %}">Students</a>
     </div>
 {% block content %}{% endblock %}
 </body>

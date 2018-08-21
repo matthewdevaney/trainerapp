@@ -4,45 +4,43 @@
         <div class="heading-one">
             {{ table_title }}
         </div>
-        <div>
             <p>
-                <a>+ Add Event</a>
+                <a>+ Add Student</a>
             </p>
-        </div>
         <table>
             <tr>
-                <th>Date</th>
-                <th>Course</th>
-                <th>Location</th>
-                <th></th>
+                <th>Last Name</th>
+                <th>First Name</th>
+                <th>Email</th>
             </tr>
-        {% for event in events %}
+        {% for student in students %}
             <tr>
-                <td>{{ event.start_datetime }}</td>
-                <td>{{ event.course }}</td>
-                <td>{{ event.location }}</td>
+                <td>{{ student.last_name }}</td>
+                <td>{{ student.first_name }}</td>
+                <td>{{ student.email }}</td>
                 <td>
                     <span class="glyphicon glyphicon-pencil"></span>
                     <span class="glyphicon glyphicon-trash"></span>
                 </td>
             </tr>
         {% endfor %}
-        {% if not events %}
+        {% if not students %}
             <tr>
                 <td>None</td>
+                <td></td>
                 <td></td>
             </tr>
         {% endif %}
         </table>
+
         <br>
         <p>
-            {% if table_title == 'Upcoming Events' %}
-            <a href="{% url 'past_event_list' %}">View Past Events</a>
+            {% if table_title == 'Students' %}
+            <a href="{% url 'inactive_student_list' %}">View Inactive Students</a>
             {% endif %}
-            {% if table_title == 'Past Events' %}
-            <a href="{% url 'upcoming_event_list' %}">View Upcoming Events</a>
+            {% if table_title == 'Inactive Students' %}
+            <a href="{% url 'student_list' %}">View Active Students</a>
             {% endif %}
         </p>
-
 
 {% endblock %}
