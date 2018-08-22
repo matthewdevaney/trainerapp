@@ -6,6 +6,9 @@ class Attendee(models.Model):
     student = models.ForeignKey('Student', on_delete=models.CASCADE)
     attended = models.BooleanField(default=False)
 
+    def toggle_attended(self):
+        pass
+
 
 class Course(models.Model):
     title = models.CharField(max_length=64)

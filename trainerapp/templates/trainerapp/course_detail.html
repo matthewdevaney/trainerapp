@@ -1,0 +1,28 @@
+{% extends 'trainerapp/base.html' %}
+
+{% block content %}
+
+<div class="heading-one">
+    Course Detail
+</div>
+<table>
+    <tr>
+        <td>Title</td>
+        <td>{{ course.title }}</td>
+    </tr>
+    <tr>
+        <td>Description</td>
+        <td>{{ course.description }}</td>
+    </tr>
+    <tr>
+        <td>Hours</td>
+        <td>{{ course.hours }}</td>
+    </tr>
+    <tr>
+        <td>Inactive</td>
+        <td>{{ course.inactive }}</td>
+    </tr>
+</table>
+
+
+{% endblock %}

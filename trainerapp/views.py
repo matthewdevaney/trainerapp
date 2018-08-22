@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.views import generic
 from django.views.generic.edit import CreateView, UpdateView
 from .models import Course, Event, Student
 from datetime import datetime
@@ -40,6 +41,10 @@ class StudentAdd(CreateView):
     template_name_suffix = '_add_form'
 
 
+class StudentDetail(generic.DetailView):
+    model = Student
+
+
 class StudentEdit(UpdateView):
     model = Student
     fields = '__all__'
@@ -52,6 +57,10 @@ class CourseAdd(CreateView):
     template_name_suffix = '_add_form'
 
 
+class CourseDetail(generic.DetailView):
+    model = Course
+
+
 class CourseEdit(UpdateView):
     model = Course
     fields = '__all__'
@@ -62,6 +71,10 @@ class EventAdd(CreateView):
     model = Event
     fields = '__all__'
     template_name_suffix = '_add_form'
+
+
+class EventDetail(generic.DetailView):
+    model = Event
 
 
 class EventEdit(UpdateView):

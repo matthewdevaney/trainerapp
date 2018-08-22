@@ -1,0 +1,55 @@
+{% extends 'trainerapp/base.html' %}
+
+{% block content %}
+
+<div class="heading-one">
+    Event Details
+</div>
+<table>
+    <tr>
+        <td>Course</td>
+        <td>{{ event.course }}</td>
+    </tr>
+    <tr>
+        <td>Start Date</td>
+        <td>{{ event.start_datetime }}</td>
+    </tr>
+    <tr>
+        <td>End Date</td>
+        <td>{{ event.end_datetime }}</td>
+    </tr>
+    <tr>
+        <td>Location</td>
+        <td>{{ event.location }}</td>
+    </tr>
+    <tr>
+        <td>Capacity</td>
+        <td>{{ event.capacity }}</td>
+    </tr>
+</table>
+
+<div class="heading-one">
+    Attendees
+</div>
+
+<table>
+{% for person in event.attendee_set.all %}
+    <tr>
+        <td>{{ person.student.last_name }}, {{ person.student.first_name }}</td>
+        <td>
+            {% if person.attended %}
+            <span class="glyphicon glyphicon-ok"></span>
+            {% else %}
+            <span class="glyphicon glyphicon-remove"></span>
+            {% endif %}
+            <span class="glyphicon glyphicon-trash"></span>
+        </td>
+    </tr>
+{% endfor %}
+</table>
+
+<p>
+    <a>+ Add Attendee</a>
+</p>
+
+{% endblock %}
