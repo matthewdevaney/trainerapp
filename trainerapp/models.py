@@ -1,13 +1,11 @@
 from django.db import models
+from django.urls import reverse
 
 
 class Attendee(models.Model):
     event = models.ForeignKey('Event', on_delete=models.CASCADE)
     student = models.ForeignKey('Student', on_delete=models.CASCADE)
     attended = models.BooleanField(default=False)
-
-    def toggle_attended(self):
-        pass
 
 
 class Course(models.Model):
@@ -36,6 +34,9 @@ class Student(models.Model):
     last_name = models.CharField(max_length=64)
     email = models.EmailField()
     inactive = models.BooleanField(blank=True)
+
+    def get_absolute_url(self):
+        return reverse('student_detail', args=[str(self.id)])
 
     def __str__(self):
         return "".join([self.last_name, ', ', self.first_name])

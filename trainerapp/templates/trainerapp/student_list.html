@@ -21,7 +21,7 @@
                 <td>
                     <a href="{% url 'student_detail' student.pk %}"><span class="glyphicon glyphicon-eye-open"></span></a>
                     <a href="{% url 'student_edit' student.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
-                    <a><span class="glyphicon glyphicon-trash"></span></a>
+                    <a href="{% url 'student_delete' student.pk %}"><span class="glyphicon glyphicon-trash"></span></a>
                 </td>
             </tr>
         {% endfor %}
