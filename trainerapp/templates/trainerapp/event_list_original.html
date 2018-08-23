@@ -9,7 +9,6 @@
                 <a href="{% url 'event_add' %}">+ Add Event</a>
             </p>
         </div>
-<div class="courses-table">
         <table>
             <tr>
                 <th>Date</th>
@@ -25,7 +24,7 @@
                 <td>
                     <a href="{% url 'event_detail' event.pk %}"><span class="glyphicon glyphicon-eye-open"></span></a>
                     <a href="{% url 'event_edit' event.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
-                    <a href="{% url 'event_delete' event.pk %}"><span class="glyphicon glyphicon-trash"></span></a>
+                    <a><span class="glyphicon glyphicon-trash"></span></a>
                 </td>
             </tr>
         {% endfor %}
@@ -35,7 +34,7 @@
                 <td></td>
             </tr>
         {% endif %}
-        </table></div>
+        </table>
         <br>
         <p>
             {% if table_title == 'Upcoming Events' %}
@@ -45,5 +44,6 @@
             <a href="{% url 'upcoming_event_list' %}">View Upcoming Events</a>
             {% endif %}
         </p>
+
 
 {% endblock %}

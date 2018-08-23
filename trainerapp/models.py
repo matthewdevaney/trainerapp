@@ -17,6 +17,9 @@ class Course(models.Model):
     def __str__(self):
         return self.title
 
+    def get_absolute_url(self):
+        return reverse('course_detail', args=[str(self.id)])
+
 
 class Event(models.Model):
     course = models.ForeignKey('Course', on_delete=models.CASCADE)
@@ -27,6 +30,9 @@ class Event(models.Model):
 
     def __str__(self):
         return "".join([str(self.course), ': ', self.start_datetime.strftime('%B %#d, %Y %#I%p')])
+
+    def get_absolute_url(self):
+        return reverse('upcoming_event_detail', args=[str(self.id)])
 
 
 class Student(models.Model):

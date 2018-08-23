@@ -9,11 +9,11 @@
 
 .glyphicon {
     font-size: 22px;
-    padding: 0px 8px;
+    padding: 0px 0px 0px 7px;
 }
 
 .top-nav {
-    background-color: #333;
+    background-color: #212121;
     overflow: hidden;
 }
 
@@ -23,44 +23,62 @@
     text-align: center;
     padding: 8px 16px;
     text-decoration: none;
-    font-size: 20px;
-    font-family: 'Patua One', cursive;
+    font-size: 18px;
+    font-family: 'Source Sans Pro', sans-serif;
 }
 
 .top-title {
-    background-color: #3333cc;
+   background-image: linear-gradient(to left, #8a30e5, #1116dd);
     overflow: hidden;
 }
 
 .top-title a {
     float: left;
-    color: #f2f2f2;
+    color: white;
     text-align: center;
     padding: 8px 16px;
     text-decoration: none;
-    font-size: 32px;
-    font-family: 'Patua One', cursive;
+    font-size: 30px;
+    font-family: 'Source Sans Pro', sans-serif;;
 }
 
-p {
-    font-size: 14px;
-    font-family: 'Roboto';
-    padding: 14px 0px  0px 16px;
-    text-align: left;
+a.nav:hover {
+  background-color: black;
+  color: white;
+  text-decoration: none;
 }
 
-th {
-    font-size: 16px;
-    font-family: 'Roboto';
-    padding: 14px 0px  0px 16px;
-    text-align: left;
+a.title:hover {
+  background-color: none;
+  color: #cecdd5;
+  text-decoration: none;
+}
+
+h1 {
+    text-align: center;
+    padding: 3px 0px 20px;
+    text-decoration: none;
+    font-size: 18px;
+    font-family: 'Source Sans Pro', sans-serif;
     font-weight: normal;
 }
 
-td {
-    font-size: 14px;
-    font-family: 'Roboto';
-    padding: 14px 0px  0px 16px;
-    text-align: left;
-
+.courses-table {
+  padding: 0px 50px 50px 50px;
+  margin: auto;
+  min-width: 600px;
+  max-width: 1500px;
 }
+
+table {
+  width: 100%;
+  margin: auto;
+}
+
+th, td {
+  margin: auto;
+  text-align: justify;
+  height: 35px;
+}
+
+tr:nth-child(even) {background-color: #f2f2f2;}

@@ -12,6 +12,11 @@ class CourseAdd(CreateView):
     template_name_suffix = '_add_form'
 
 
+class CourseDelete(DeleteView):
+    model = Course
+    success_url = reverse_lazy('course_list')
+
+
 class CourseDetail(generic.DetailView):
     model = Course
 
@@ -32,6 +37,11 @@ class EventDetail(generic.DetailView):
     model = Event
 
 
+class EventDelete(DeleteView):
+    model = Event
+    success_url = reverse_lazy('upcoming_event_list')
+
+
 class EventEdit(UpdateView):
     model = Event
     fields = '__all__'
@@ -50,7 +60,7 @@ class StudentDetail(generic.DetailView):
 
 class StudentDelete(DeleteView):
     model = Student
-    success_url = reverse_lazy('student_detail')
+    success_url = reverse_lazy('student_list')
 
 
 class StudentEdit(UpdateView):
