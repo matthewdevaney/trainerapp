@@ -1,8 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.urls import reverse_lazy
 from django.views import generic
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
-from .models import Course, Event, Student
+from .models import Attendee, Course, Event, Student
 from datetime import datetime
 
 
