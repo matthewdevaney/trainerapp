@@ -47,7 +47,8 @@
             {% else %}
             <span class="glyphicon glyphicon-remove"></span>
             {% endif %}
-            <span class="glyphicon glyphicon-trash"></span>
+            <a href="{% url 'attendee_edit' person.id %}"><span class="glyphicon glyphicon-pencil"></span></a>
+            <a href="{% url 'attendee_delete' person.id %}"><span class="glyphicon glyphicon-trash"></span></a>
         </td>
     </tr>
 {% endfor %}
@@ -55,7 +56,7 @@
 
 </div>
 <p>
-    <a>+ Add Attendee</a>
+    <a href="{% url 'attendee_add' %}">+ Add Attendee</a>
 </p>
 
 {% endblock %}

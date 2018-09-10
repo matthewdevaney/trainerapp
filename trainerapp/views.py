@@ -6,6 +6,28 @@ from .models import Attendee, Course, Event, Student
 from datetime import datetime
 
 
+class AttendeeAdd(CreateView):
+    model = Attendee
+    fields = '__all__'
+    template_name_suffix = '_add_form'
+
+
+class AttendeeEdit(UpdateView):
+    model = Attendee
+    fields = ['attended']
+    template_name_suffix = '_edit_form'
+
+    def get_success_url(self):
+        return reverse_lazy('event_detail', kwargs={'pk': self.object.event.id})
+
+
+class AttendeeDelete(DeleteView):
+    model = Attendee
+
+    def get_success_url(self):
+        return reverse_lazy('event_detail', kwargs={'pk': self.object.event.id})
+
+
 class CourseAdd(CreateView):
     model = Course
     fields = '__all__'

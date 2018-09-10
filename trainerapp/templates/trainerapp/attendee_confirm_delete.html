@@ -1,0 +1,19 @@
+{% extends "trainerapp/base.html" %}
+
+{% block content %}
+
+<div class="heading-one">
+    Delete Attendee
+</div>
+
+<p>Are you sure you want to delete {{ attendee.student }}?</p>
+
+<table>
+    <td>
+<form action="" method="POST">
+    {% csrf_token %}
+    <input type="submit" action="" value="Delete"/>
+</form>
+    </td>
+</table>
+{% endblock %}

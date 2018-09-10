@@ -1,0 +1,30 @@
+{% extends 'trainerapp/base.html' %}
+
+{% block content %}
+
+<div class="heading-one">
+    Edit Attendee
+</div>
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form.errors }}
+    <table>
+        <tr>
+            <td>Student</td>
+            <td>{{ attendee.student }}</td>
+        </tr>
+        <tr>
+            <td>Event</td>
+            <td>{{ attendee.event }}</td>
+        </tr>
+        <tr>
+            <td>Attended</td>
+            <td>{{ form.attended }}</td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="Submit"/></td>
+        </tr>
+    </table>
+</form>
+
+{% endblock %}

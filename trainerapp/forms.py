@@ -1,5 +1,12 @@
-from django.forms import inlineformset_factory
+
+from django.forms import inlineformset_factory, ModelForm
+from .models import Attendee, Event
 
 
-class EventForm(ModelForm):
-    EventFormSet = inlineformset_factory(Attendee, Event, fields=('last_name','first_name','attended',))
+class AttendeeForm(ModelForm):
+    class Meta:
+        model = Attendee
+        exclude = ()
+
+
+AttendeeFormSet = inlineformset_factory(Event, Attendee, form=AttendeeForm, extra=1)
