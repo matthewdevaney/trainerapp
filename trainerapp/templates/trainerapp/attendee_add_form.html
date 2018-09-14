@@ -21,7 +21,10 @@
             <td>{{ form.attended }}</td>
         </tr>
         <tr>
-            <td><input type="submit" value="Submit"/></td>
+            <td>
+                <input type="hidden" name="next" value="{{ request.GET.next }}">
+                <button type="submit">Submit</button>
+            </td>
         </tr>
     </table>
 

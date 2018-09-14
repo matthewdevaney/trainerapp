@@ -11,6 +11,11 @@ class AttendeeAdd(CreateView):
     fields = '__all__'
     template_name_suffix = '_add_form'
 
+    def get_success_url(self):
+        next_url = self.request.POST.get('next', None)
+        if next_url:
+            return next_url
+
 
 class AttendeeEdit(UpdateView):
     model = Attendee

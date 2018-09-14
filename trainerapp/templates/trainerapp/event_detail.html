@@ -56,7 +56,7 @@
 
 </div>
 <p>
-    <a href="{% url 'attendee_add' %}">+ Add Attendee</a>
+    <a href="{% url 'attendee_add' %}?next={{ request.path|urlencode }}">+ Add Attendee</a>
 </p>
 
 {% endblock %}

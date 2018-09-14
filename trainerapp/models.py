@@ -41,6 +41,9 @@ class Student(models.Model):
     email = models.EmailField()
     inactive = models.BooleanField(blank=True)
 
+    class Meta:
+        ordering = ('last_name', 'first_name')
+
     def get_absolute_url(self):
         return reverse('student_detail', args=[str(self.id)])
 
