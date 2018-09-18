@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.utils.timezone import localtime
 
 
 class Attendee(models.Model):
@@ -29,7 +30,7 @@ class Event(models.Model):
     capacity = models.IntegerField(blank=True)
 
     def __str__(self):
-        return "".join([str(self.course), ': ', self.start_datetime.strftime('%B %#d, %Y %#I%p')])
+        return "".join([str(self.course), ': ', localtime(self.start_datetime).strftime('%B %#d, %Y %#I%p')])
 
     def get_absolute_url(self):
         return reverse('upcoming_event_detail', args=[str(self.id)])
