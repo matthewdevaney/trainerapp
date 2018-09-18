@@ -11,6 +11,11 @@ class AttendeeAdd(CreateView):
     fields = '__all__'
     template_name_suffix = '_add_form'
 
+    def get_initial(self):
+        initial = super(AttendeeAdd, self).get_initial()
+        initial['event'] = self.request.GET.get('event_id', None)
+        return initial
+
     def get_success_url(self):
         next_url = self.request.POST.get('next', None)
         if next_url:
