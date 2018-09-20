@@ -102,7 +102,7 @@ class StudentEdit(UpdateView):
 
 
 def upcoming_event_list(request):
-    events = Event.objects.filter(end_datetime__gt=datetime.now()).order_by('start_datetime')
+    events = Event.objects.filter(end_datetime__gte=datetime.now()).order_by('start_datetime')
     return render(request, 'trainerapp/event_list.html', {'events': events, 'table_title': 'Upcoming Events'})
 
 
