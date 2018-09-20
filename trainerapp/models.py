@@ -33,7 +33,7 @@ class Event(models.Model):
         return "".join([str(self.course), ': ', localtime(self.start_datetime).strftime('%B %#d, %Y %#I%p')])
 
     def get_absolute_url(self):
-        return reverse('upcoming_event_detail', args=[str(self.id)])
+        return reverse('event_detail', args=[str(self.id)])
 
 
 class Student(models.Model):
