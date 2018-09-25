@@ -1,0 +1,40 @@
+{% extends 'trainerapp/base.html' %}
+
+{% block content %}
+        <div class="heading-one">
+            Reports
+        </div>
+
+        <table>
+            <tr>
+                <th>Report</th>
+                <th>Description</th>
+                <th></th>
+            </tr>
+            <tr>
+                <td>Courses List (Active)</td>
+                <td>A list of all active courses </td>
+                <td><a href="{% url 'course_export' %}"><span class="glyphicon glyphicon-download"></span></a></td>
+            </tr>
+            <tr>
+                <td>Students List (Active)</td>
+                <td>A list of all active students</td>
+                <td><a href="{% url 'student_export' %}"><span class="glyphicon glyphicon-download"></span></a></td>
+            </tr>
+            <tr>
+                <td>Events List</td>
+                <td>A list of all events upcoming and past</td>
+                <td><a href="{% url 'event_export' %}"><span class="glyphicon glyphicon-download"></span></a></td>
+            </tr>
+            <tr>
+                <td>Attendees List</td>
+                <td>A list of attendees to all events</td>
+                <td><a href="{% url 'attendee_export' %}"><span class="glyphicon glyphicon-download"></span></a></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+
+{% endblock %}

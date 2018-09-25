@@ -3,10 +3,12 @@
 {% block content %}
         <div class="heading-one">
             {{ table_title }}
+
         </div>
-            <p>
-                <a href="{% url 'student_add' %}">+ Add Student</a>
-            </p>
+        <div class="heading-action">
+                <a href="{% url 'student_add' %}"><span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;Add Student</a>
+                <a href="{% url 'student_export' %}"><span class="glyphicon glyphicon-download"></span>&nbsp;&nbsp;Download</a>
+        </div>
         <table>
             <tr>
                 <th>Last Name</th>

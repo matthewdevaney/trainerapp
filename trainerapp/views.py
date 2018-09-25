@@ -1,4 +1,7 @@
-from django.shortcuts import get_object_or_404, render
+import csv
+
+from django.http import HttpResponse
+from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
@@ -129,3 +132,64 @@ def student_list(request):
 def inactive_student_list(request):
     students = Student.objects.filter(inactive=True).order_by('last_name', 'first_name', 'id')
     return render(request, 'trainerapp/student_list.html', {'students': students, 'table_title': 'Inactive Students'})
+
+
+def students_export_csv(request):
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="students.csv"'
+
+    writer = csv.writer(response)
+    writer.writerow(['First Name', 'Last Name', 'E-mail', 'Inactive'])
+
+    students = Student.objects.filter(inactive=False).values_list('first_name', 'last_name', 'email', 'inactive')
+    for student in students:
+        writer.writerow(student)
+
+    return response
+
+
+def courses_export_csv(request):
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="courses.csv"'
+
+    writer = csv.writer(response)
+    writer.writerow(['Title', 'Description', 'Hours', 'Inactive'])
+
+    courses = Course.objects.filter(inactive=False).values_list('title', 'description', 'hours', 'inactive')
+    for course in courses:
+        writer.writerow(course)
+
+    return response
+
+
+def events_export_csv(request):
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="events.csv"'
+
+    writer = csv.writer(response)
+    writer.writerow(['Course', 'Start Date', 'End Date', 'Location', 'Capacity'])
+
+    events = Event.objects.all().prefetch_related('course__title').values_list('course__title', 'start_datetime', 'end_datetime', 'location', 'capacity')
+    for event in events:
+        print(event)
+        writer.writerow(event)
+
+    return response
+
+
+def attendees_export_csv(request):
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="attendees.csv"'
+
+    writer = csv.writer(response)
+    writer.writerow(['Course', 'Start DateTime', 'Hours', 'First Name', 'Last Name', 'Attended'])
+
+    attendees = Attendee.objects.filter(attended=True).prefetch_related('event__course__title', 'event__start_datetime', 'event__course__hours', 'student__first_name', 'student__last_name').values_list('event__course__title', 'event__start_datetime', 'event__course__hours', 'student__first_name', 'student__last_name', 'attended')
+    for attendee in attendees:
+        writer.writerow(attendee)
+
+    return response
+
+
+def reports_list(request):
+    return render(request, template_name='trainerapp/report_list.html')
