@@ -171,7 +171,6 @@ def events_export_csv(request):
 
     events = Event.objects.all().prefetch_related('course__title').values_list('course__title', 'start_datetime', 'end_datetime', 'location', 'capacity')
     for event in events:
-        print(event)
         writer.writerow(event)
 
     return response
