@@ -2,6 +2,7 @@ import csv
 
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.utils.timezone import localtime
 from django.urls import reverse_lazy
 from django.views import generic
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
@@ -169,7 +170,8 @@ def events_export_csv(request):
     writer = csv.writer(response)
     writer.writerow(['Course', 'Start Date', 'End Date', 'Location', 'Capacity'])
 
-    events = Event.objects.all().prefetch_related('course__title').values_list('course__title', 'start_datetime', 'end_datetime', 'location', 'capacity')
+    events = Event.objects.all().prefetch_related('course__title').values_list('course__title', 'start_datetime',
+                                                                               'end_datetime', 'location', 'capacity')
     for event in events:
         writer.writerow(event)
 
@@ -183,9 +185,14 @@ def attendees_export_csv(request):
     writer = csv.writer(response)
     writer.writerow(['Course', 'Start DateTime', 'Hours', 'First Name', 'Last Name', 'Attended'])
 
-    attendees = Attendee.objects.filter(attended=True).prefetch_related('event__course__title', 'event__start_datetime', 'event__course__hours', 'student__first_name', 'student__last_name').values_list('event__course__title', 'event__start_datetime', 'event__course__hours', 'student__first_name', 'student__last_name', 'attended')
+    attendees = Attendee.objects.filter(attended=True).select_related('event__course__title', 'event__start_datetime',
+                'event__course__hours', 'student__first_name', 'student__last_name').values_list('event__course__title',
+                'event__start_datetime', 'event__course__hours', 'student__first_name', 'student__last_name','attended')
+
     for attendee in attendees:
-        writer.writerow(attendee)
+        modify_attendee = (attendee[0], localtime(attendee[1]).strftime('%B %#d, %Y'), attendee[2], attendee[3],
+                           attendee[4], attendee[5])
+        writer.writerow(modify_attendee)
 
     return response
 
