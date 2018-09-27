@@ -1,5 +1,7 @@
 import csv
 
+from .forms import AttendeeForm
+
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.utils.timezone import localtime
@@ -11,9 +13,9 @@ from datetime import datetime
 
 
 class AttendeeAdd(CreateView):
-    model = Attendee
-    fields = '__all__'
-    template_name_suffix = '_add_form'
+
+    form_class = AttendeeForm
+    template_name = 'trainerapp\\attendee_add_form.html'
 
     def get_initial(self):
         initial = super(AttendeeAdd, self).get_initial()
@@ -24,6 +26,11 @@ class AttendeeAdd(CreateView):
         next_url = self.request.POST.get('next', None)
         if next_url:
             return next_url
+
+
+""" fields = '__all__'
+    template_name_suffix = '_add_form'
+"""
 
 
 class AttendeeEdit(UpdateView):

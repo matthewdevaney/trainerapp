@@ -9,10 +9,6 @@
     {% csrf_token %}
     <table>
         <tr>
-            <td>Event</td>
-            <td>{{ form.event }} {{ xyz }}</td>
-        </tr>
-        <tr>
             <td>Student</td>
             <td>{{ form.student }}</td>
         </tr>
@@ -22,6 +18,7 @@
         </tr>
         <tr>
             <td>
+                {{ form.event }}
                 <input type="hidden" name="next" value="{{ request.GET.next }}">
                 <button type="submit">Submit</button>
             </td>
