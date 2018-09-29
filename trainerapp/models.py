@@ -26,6 +26,12 @@ class Event(models.Model):
     course = models.ForeignKey('Course', on_delete=models.CASCADE)
     start_datetime = models.DateTimeField()
     end_datetime = models.DateTimeField()
+    """
+    start_date = models.DateField()
+    start_time = models.TimeField()
+    end_date = models.DateField()
+    end_time = models.TimeField()
+    """
     location = models.CharField(max_length=128, blank=True)
     capacity = models.IntegerField(blank=True)
 
