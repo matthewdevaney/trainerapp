@@ -1,3 +1,4 @@
+from django.contrib.admin.widgets import AdminDateWidget
 from django import forms
 from django.forms import ModelForm
 from .models import Attendee, Event
