@@ -28,11 +28,6 @@ class AttendeeAdd(CreateView):
             return next_url
 
 
-""" fields = '__all__'
-    template_name_suffix = '_add_form'
-"""
-
-
 class AttendeeEdit(UpdateView):
     model = Attendee
     fields = ['attended']
@@ -113,12 +108,12 @@ class StudentEdit(UpdateView):
 
 
 def upcoming_event_list(request):
-    events = Event.objects.filter(end_datetime__gte=datetime.now()).order_by('start_datetime')
+    events = Event.objects.filter(end_date__gte=datetime.now()).order_by('start_date', 'start_time')
     return render(request, 'trainerapp/event_list.html', {'events': events, 'table_title': 'Upcoming Events'})
 
 
 def past_event_list(request):
-    events = Event.objects.filter(end_datetime__lt=datetime.now()).order_by('-start_datetime')
+    events = Event.objects.filter(end_date__lt=datetime.now()).order_by('-start_date', '-start_time')
     return render(request, 'trainerapp/event_list.html', {'events': events, 'table_title': 'Past Events'})
 
 
@@ -175,10 +170,11 @@ def events_export_csv(request):
     response['Content-Disposition'] = 'attachment; filename="events.csv"'
 
     writer = csv.writer(response)
-    writer.writerow(['Course', 'Start Date', 'End Date', 'Location', 'Capacity'])
+    writer.writerow(['Course', 'Start Date', 'Start Time', 'End Date', 'End Time', 'Location', 'Capacity'])
 
-    events = Event.objects.all().prefetch_related('course__title').values_list('course__title', 'start_datetime',
-                                                                               'end_datetime', 'location', 'capacity')
+    events = Event.objects.all().prefetch_related('course__title').values_list('course__title', 'start_date',
+                                                                               'start_time', 'end_date',
+                                                                               'end_time', 'location', 'capacity')
     for event in events:
         writer.writerow(event)
 
@@ -190,14 +186,15 @@ def attendees_export_csv(request):
     response['Content-Disposition'] = 'attachment; filename="attendees.csv"'
 
     writer = csv.writer(response)
-    writer.writerow(['Course', 'Start DateTime', 'Hours', 'First Name', 'Last Name', 'Attended'])
+    writer.writerow(['Course', 'Start Date', 'Hours', 'First Name', 'Last Name', 'Attended'])
 
-    attendees = Attendee.objects.filter(attended=True).select_related('event__course__title', 'event__start_datetime',
-                'event__course__hours', 'student__first_name', 'student__last_name').values_list('event__course__title',
-                'event__start_datetime', 'event__course__hours', 'student__first_name', 'student__last_name','attended')
+    attendees = Attendee.objects.filter(attended=True).select_related('event__course__title', 'event__start_date',
+                'event__course__hours', 'student__first_name', 'student__last_name').values_list(
+                'event__course__title', 'event__start_date', 'event__course__hours',
+                'student__first_name', 'student__last_name', 'attended')
 
     for attendee in attendees:
-        modify_attendee = (attendee[0], localtime(attendee[1]).strftime('%B %#d, %Y'), attendee[2], attendee[3],
+        modify_attendee = (attendee[0], attendee[1].strftime('%B %#d, %Y'), attendee[2], attendee[3],
                            attendee[4], attendee[5])
         writer.writerow(modify_attendee)
 

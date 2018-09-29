@@ -4,15 +4,12 @@ from .models import Attendee, Course, Event, Student
 
 @admin.register(Attendee)
 class AdminAttendee(admin.ModelAdmin):
-    list_display = ['id', 'event_description', 'event_datetime', 'student_name', 'attended']
+    list_display = ['id', 'event_description', 'student_name', 'attended']
     ordering = ['id']
     fields = ['event', 'student', 'attended']
 
     def event_description(self, obj):
         return obj.event.course
-
-    def event_datetime(self, obj):
-        return obj.event.start_datetime.strftime('%B %#d, %Y @ %#I%p')
 
     def student_name(self, obj):
         return "".join([obj.student.last_name, ', ', obj.student.first_name])
@@ -27,9 +24,9 @@ class AdminCourse(admin.ModelAdmin):
 
 @admin.register(Event)
 class AdminEvent(admin.ModelAdmin):
-    list_display = ['id', 'course_name', 'location', 'capacity', 'start_datetime', 'end_datetime']
+    list_display = ['id', 'course_name', 'location', 'capacity', 'start_date', 'start_date', 'end_date', 'end_time']
     ordering = ['id']
-    fields = ['course', ('location', 'capacity'), ('start_datetime', 'end_datetime')]
+    fields = ['course', ('location', 'capacity'), ('start_date', 'start_time'), ('end_date', 'end_time')]
 
     def course_name(self, obj):
         return obj.course.title

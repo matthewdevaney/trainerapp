@@ -13,13 +13,15 @@
         <table>
             <tr>
                 <th>Date</th>
+                <th>Time</th>
                 <th>Course</th>
                 <th>Location</th>
                 <th></th>
             </tr>
         {% for event in events %}
             <tr>
-                <td>{{ event.start_datetime }}</td>
+                <td>{{ event.start_date }}</td>
+                <td>{{ event.start_time }}</td>
                 <td>{{ event.course }}</td>
                 <td>{{ event.location }}</td>
                 <td>
