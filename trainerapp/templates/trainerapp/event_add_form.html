@@ -9,7 +9,6 @@
 </div>
 <form action="" method="post">
     {% csrf_token %}
-
     <table>
         <tr>
             <td>Course</td>
@@ -17,19 +16,11 @@
         </tr>
         <tr>
             <td>Start Date</td>
-            <td>{{ form.start_date }}</td>
-        </tr>
-        <tr>
-            <td>Start Time</td>
-            <td>{{ form.start_time }}</td>
+            <td>{{ form.start_date }} {{ form.start_time }}</td>
         </tr>
         <tr>
             <td>End Date</td>
-            <td>{{ form.end_date }}</td>
-        </tr>
-        <tr>
-            <td>End Time</td>
-            <td>{{ form.end_time }}</td>
+            <td>{{ form.end_date }} {{ form.end_time }}</td>
         </tr>
         <tr>
             <td>Location</td>

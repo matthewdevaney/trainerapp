@@ -1,6 +1,6 @@
 import csv
 
-from .forms import AttendeeForm
+from .forms import AttendeeForm, EventForm
 
 from django.http import HttpResponse
 from django.shortcuts import render
@@ -66,9 +66,9 @@ class CourseEdit(UpdateView):
 
 
 class EventAdd(CreateView):
-    model = Event
-    fields = '__all__'
-    template_name_suffix = '_add_form'
+
+    form_class = EventForm
+    template_name = 'trainerapp\\event_add_form.html'
 
 
 class EventDetail(generic.DetailView):
@@ -81,9 +81,16 @@ class EventDelete(DeleteView):
 
 
 class EventEdit(UpdateView):
+
+    form_class = EventForm
+    model = Event
+    template_name_suffix = '_edit_form'
+
+"""
     model = Event
     fields = '__all__'
     template_name_suffix = '_edit_form'
+"""
 
 
 class StudentAdd(CreateView):
