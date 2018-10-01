@@ -1,0 +1,17 @@
+{% extends 'trainerapp/base.html' %}
+
+{% block content %}
+
+<div class="heading-one">
+    Logged Out
+</div>
+<div class="courses-table">
+
+<table>
+    <tr>
+        <td>Click <a href="{% url 'login' %}">here</a> to login again</td>
+    </tr>
+</table>
+</div>
+
+{% endblock %}

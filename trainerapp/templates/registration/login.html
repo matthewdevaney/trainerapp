@@ -1,0 +1,32 @@
+{% extends 'trainerapp/base.html' %}
+
+{% block content %}
+
+<div class="heading-one">
+    Login
+</div>
+<div class="courses-table">
+
+<form method="post" action="{% url 'login' %}">
+{% csrf_token %}
+    <table>
+        <tr>
+            <td>Username</td>
+            <td>{{ form.username }}</td>
+        </tr>
+        <tr>
+            <td>Password</td>
+            <td>{{ form.password }}</td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="Login" /></td>
+            <td><input type="hidden" name="next" value="{{ next }}"/></td>
+        </tr>
+    </table>
+
+
+</form>
+
+</div>
+
+{% endblock %}

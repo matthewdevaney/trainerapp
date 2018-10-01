@@ -1,14 +1,14 @@
-import csv
-
-from .forms import AttendeeForm, EventForm
-
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse
 from django.shortcuts import render
-from django.utils.timezone import localtime
 from django.urls import reverse_lazy
 from django.views import generic
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
+
+from .forms import AttendeeForm, EventForm
 from .models import Attendee, Course, Event, Student
+
+import csv
 from datetime import datetime
 
 
