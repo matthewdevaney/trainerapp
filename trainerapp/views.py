@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse
 from django.shortcuts import render
@@ -12,7 +13,7 @@ import csv
 from datetime import datetime
 
 
-class AttendeeAdd(CreateView):
+class AttendeeAdd(LoginRequiredMixin, CreateView):
 
     form_class = AttendeeForm
     template_name = 'trainerapp\\attendee_add_form.html'
@@ -28,7 +29,7 @@ class AttendeeAdd(CreateView):
             return next_url
 
 
-class AttendeeEdit(UpdateView):
+class AttendeeEdit(LoginRequiredMixin, UpdateView):
     model = Attendee
     fields = ['attended']
     template_name_suffix = '_edit_form'
@@ -37,50 +38,50 @@ class AttendeeEdit(UpdateView):
         return reverse_lazy('event_detail', kwargs={'pk': self.object.event.id})
 
 
-class AttendeeDelete(DeleteView):
+class AttendeeDelete(LoginRequiredMixin, DeleteView):
     model = Attendee
 
     def get_success_url(self):
         return reverse_lazy('event_detail', kwargs={'pk': self.object.event.id})
 
 
-class CourseAdd(CreateView):
+class CourseAdd(LoginRequiredMixin, CreateView):
     model = Course
     fields = '__all__'
     template_name_suffix = '_add_form'
 
 
-class CourseDelete(DeleteView):
+class CourseDelete(LoginRequiredMixin, DeleteView):
     model = Course
     success_url = reverse_lazy('course_list')
 
 
-class CourseDetail(generic.DetailView):
+class CourseDetail(LoginRequiredMixin, generic.DetailView):
     model = Course
 
 
-class CourseEdit(UpdateView):
+class CourseEdit(LoginRequiredMixin, UpdateView):
     model = Course
     fields = '__all__'
     template_name_suffix = '_edit_form'
 
 
-class EventAdd(CreateView):
+class EventAdd(LoginRequiredMixin, CreateView):
 
     form_class = EventForm
     template_name = 'trainerapp\\event_add_form.html'
 
 
-class EventDetail(generic.DetailView):
+class EventDetail(LoginRequiredMixin, generic.DetailView):
     model = Event
 
 
-class EventDelete(DeleteView):
+class EventDelete(LoginRequiredMixin, DeleteView):
     model = Event
     success_url = reverse_lazy('upcoming_event_list')
 
 
-class EventEdit(UpdateView):
+class EventEdit(LoginRequiredMixin, UpdateView):
 
     form_class = EventForm
     model = Event
@@ -93,57 +94,64 @@ class EventEdit(UpdateView):
 """
 
 
-class StudentAdd(CreateView):
+class StudentAdd(LoginRequiredMixin, CreateView):
     model = Student
     fields = '__all__'
     template_name_suffix = '_add_form'
 
 
-class StudentDetail(generic.DetailView):
+class StudentDetail(LoginRequiredMixin, generic.DetailView):
     model = Student
 
 
-class StudentDelete(DeleteView):
+class StudentDelete(LoginRequiredMixin, DeleteView):
     model = Student
     success_url = reverse_lazy('student_list')
 
 
-class StudentEdit(UpdateView):
+class StudentEdit(LoginRequiredMixin, UpdateView):
     model = Student
     fields = '__all__'
     template_name_suffix = '_edit_form'
 
 
+@login_required
 def upcoming_event_list(request):
     events = Event.objects.filter(end_date__gte=datetime.now()).order_by('start_date', 'start_time')
     return render(request, 'trainerapp/event_list.html', {'events': events, 'table_title': 'Upcoming Events'})
 
 
+@login_required
 def past_event_list(request):
     events = Event.objects.filter(end_date__lt=datetime.now()).order_by('-start_date', '-start_time')
     return render(request, 'trainerapp/event_list.html', {'events': events, 'table_title': 'Past Events'})
 
 
+@login_required
 def course_list(request):
     courses = Course.objects.filter(inactive=False).order_by('id')
     return render(request, 'trainerapp/course_list.html', {'courses': courses, 'table_title': 'Courses'})
 
 
+@login_required
 def inactive_course_list(request):
     courses = Course.objects.filter(inactive=True).order_by('id')
     return render(request, 'trainerapp/course_list.html', {'courses': courses, 'table_title': 'Inactive Courses'})
 
 
+@login_required
 def student_list(request):
     students = Student.objects.filter(inactive=False).order_by('last_name', 'first_name', 'id')
     return render(request, 'trainerapp/student_list.html', {'students': students, 'table_title': 'Students'})
 
 
+@login_required
 def inactive_student_list(request):
     students = Student.objects.filter(inactive=True).order_by('last_name', 'first_name', 'id')
     return render(request, 'trainerapp/student_list.html', {'students': students, 'table_title': 'Inactive Students'})
 
 
+@login_required
 def students_export_csv(request):
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename="students.csv"'
@@ -158,6 +166,7 @@ def students_export_csv(request):
     return response
 
 
+@login_required
 def courses_export_csv(request):
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename="courses.csv"'
@@ -172,6 +181,7 @@ def courses_export_csv(request):
     return response
 
 
+@login_required
 def events_export_csv(request):
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename="events.csv"'
@@ -188,6 +198,7 @@ def events_export_csv(request):
     return response
 
 
+@login_required
 def attendees_export_csv(request):
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename="attendees.csv"'
@@ -208,5 +219,6 @@ def attendees_export_csv(request):
     return response
 
 
+@login_required
 def reports_list(request):
     return render(request, template_name='trainerapp/report_list.html')
