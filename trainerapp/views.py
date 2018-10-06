@@ -87,12 +87,6 @@ class EventEdit(LoginRequiredMixin, UpdateView):
     model = Event
     template_name_suffix = '_edit_form'
 
-"""
-    model = Event
-    fields = '__all__'
-    template_name_suffix = '_edit_form'
-"""
-
 
 class StudentAdd(LoginRequiredMixin, CreateView):
     model = Student
